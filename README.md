@@ -13,6 +13,8 @@
 ## Installation
 To develop and run a fastapi application, you need to install 2 packages.
 - The first package is the fastapi package
+
    pip install fastapi
 - The second one is the ASGI server for deploying the application in production
+
    pip install uvicorn[standard]
