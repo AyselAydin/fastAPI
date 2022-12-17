@@ -9,7 +9,10 @@
  - Easy to build large scale web applications with multiple micro services using routers.
  - Faster performance compared to other frameworks
  - Works on the Python version greater than 3.6
- - API documents will get generated automatically without any extra lines of code and additional effort.
 
-### Requirements
-FastAPI works on python versions above 3.6
+## Installation
+To develop and run a fastapi application, you need to install 2 packages.
+- The first package is the fastapi package
+   pip install fastapi
+- The second one is the ASGI server for deploying the application in production
+   pip install uvicorn[standard]
