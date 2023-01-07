@@ -24,15 +24,15 @@ async def my_first_get_api():
 def get_item(book_id: int):
     return books[book_id]
 
-@app.get("/get-by-auther")
+@app.get("/get-by-auther", summary = "Get book by auther")
 def get_item2(auther:str):
     for id in books:
         if books[id]["auther"] == auther:
             return books[id]
     return {"Data": "The book you were searching was not found"}
 
-@app.get("/get-by-auther", summary = "Optional parameters")
-def get_item2(auther:Optional[str]):
+@app.get("/get-by-auther_optional", summary = "Optional parameters")
+def get_item2(auther:Optional[str] = None):
     for id in books:
         if books[id]["auther"] == auther:
             return books[id]
