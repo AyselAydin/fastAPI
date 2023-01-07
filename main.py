@@ -10,6 +10,12 @@ class Item(BaseModel):
     genre: str
     auther: Optional[str] = None
 
+class updateItem(BaseModel):
+    name: Optional[str] = None
+    price : Optional[float] = None
+    genre: Optional[str] = None
+    auther: Optional[str] = None
+
 books = {
     1:{
         "name":"The Little Prince",
@@ -53,4 +59,20 @@ def add_book(book_id:int, item: Item):
         return {"Error": "Book ID already exists"}
     books[book_id] = {"name" : item.name, "price" : item.price, "genre" : item.genre, "auther" : item.auther}
     #books[book_id] = item
+    return books[book_id]
+
+@app.put("/update-book/{book_id}")
+def update_book(book_id:int, item: updateItem):
+    if book_id not in books:
+        return {"Error": "Book Id doesn't exists"}
+
+    if item.name != None:
+        books[book_id].name = item.name
+    if item.price != None:
+        books[book_id].price = item.price
+    if item.genre != None:
+        books[book_id].genre = item.genre
+    if item.auther != None:
+        books[book_id].auther = item.auther
+        
     return books[book_id]
