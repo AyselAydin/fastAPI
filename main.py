@@ -1,17 +1,26 @@
 from fastapi import FastAPI
 from typing import Optional
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class Item(BaseModel):
+    name: str
+    price : float
+    genre: str
+    auther: Optional[str] = None
 
 books = {
     1:{
         "name":"The Little Prince",
         "price":5.50,
+        "genre":"Children Literature",
         "auther":"Antoine de Saint-Exupéry"
     },
     2:{
         "name":"Sapiens",
         "price":9.90,
+        "genre":"Nonfiction",
         "auther":"Yuval Noah Harari"
     }
 }
@@ -37,3 +46,11 @@ def get_item2(auther:Optional[str] = None):
         if books[id]["auther"] == auther:
             return books[id]
     return {"Data": "The book you were searching was not found"}
+
+@app.post("/add-book/{book_id}")
+def add_book(book_id:int, item: Item):
+    if book_id in books:
+        return {"Error": "Book ID already exists"}
+    books[book_id] = {"name" : item.name, "price" : item.price, "genre" : item.genre, "auther" : item.auther}
+    #books[book_id] = item
+    return books[book_id]
