@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from typing import Optional
 
 app = FastAPI()
 
@@ -25,6 +26,13 @@ def get_item(book_id: int):
 
 @app.get("/get-by-auther")
 def get_item2(auther:str):
+    for id in books:
+        if books[id]["auther"] == auther:
+            return books[id]
+    return {"Data": "The book you were searching was not found"}
+
+@app.get("/get-by-auther", summary = "Optional parameters")
+def get_item2(auther:Optional[str]):
     for id in books:
         if books[id]["auther"] == auther:
             return books[id]
