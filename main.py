@@ -22,3 +22,10 @@ async def my_first_get_api():
 @app.get("/get-book/{book_id}", summary="FastAPI get example with parameters")
 def get_item(book_id: int):
     return books[book_id]
+
+@app.get("/get-by-auther")
+def get_item2(auther:str):
+    for id in books:
+        if books[id]["auther"] == auther:
+            return books[id]
+    return {"Data": "The book you were searching was not found"}
