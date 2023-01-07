@@ -10,7 +10,7 @@ class Item(BaseModel):
     genre: str
     auther: Optional[str] = None
 
-class updateItem(BaseModel):
+class UpdateItem(BaseModel):
     name: Optional[str] = None
     price : Optional[float] = None
     genre: Optional[str] = None
@@ -62,7 +62,7 @@ def add_book(book_id:int, item: Item):
     return books[book_id]
 
 @app.put("/update-book/{book_id}")
-def update_book(book_id:int, item: updateItem):
+def update_book(book_id:int, item: UpdateItem):
     if book_id not in books:
         return {"Error": "Book Id doesn't exists"}
 
@@ -74,5 +74,13 @@ def update_book(book_id:int, item: updateItem):
         books[book_id].genre = item.genre
     if item.auther != None:
         books[book_id].auther = item.auther
-        
+
     return books[book_id]
+
+@app.delete("/delete-book")
+def delete_book(book_id:int):
+    if book_id not in books:
+        return {"Error":"book does not exists."}
+
+    del books[book_id]
+    return {"Result": "The Book deleted"}
