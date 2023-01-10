@@ -71,13 +71,13 @@ def update_book(book_id:int, item: UpdateItem):
         raise HTTPException(status_code = 404, detail="Book Id doesn't exists")
 
     if item.name != None:
-        books[book_id].name = item.name
+        books[book_id]["name"] = item.name
     if item.price != None:
-        books[book_id].price = item.price
+        books[book_id]["price"] = item.price
     if item.genre != None:
-        books[book_id].genre = item.genre
+        books[book_id]["genre"] = item.genre
     if item.auther != None:
-        books[book_id].auther = item.auther
+        books[book_id]["auther"] = item.auther
 
     return books[book_id]
 
